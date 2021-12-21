@@ -2,7 +2,7 @@ import React from 'react'
 
 const IndexAvances = () => {
     return (
-        <div>
+        <div className='m-2'>
             pag avances
         </div>
     )

@@ -4,18 +4,15 @@
 @tailwind utilities;
 
 .input {
-    @apply p-2 m-2 border border-purple-200 bg-gray-200 focus:outline-none focus:border-indigo-800 rounded-md shadow-sm bg-gray-200;
-  }
+  @apply p-2 m-2 border border-purple-200 bg-gray-200 focus:outline-none focus:border-indigo-800 rounded-md shadow-sm ;
+}
 
 .sidebar {
-    @apply w-64 bg-purple-600 bg-opacity-75 shadow flex-col justify-between m-2 rounded-md;
-  }
+  @apply w-64 bg-purple-600 bg-opacity-75 shadow flex-col justify-between m-2 rounded-md;
+}
 
 .sidebar-route {
-    @apply rounded-md flex w-full justify-between cursor-pointer items-center m-3 p-3;
-  }
-
-.fondo {
-    background-color: #04aa96;
-    color: #ffffff;
+  @apply rounded-md flex w-full justify-between cursor-pointer items-center m-3 p-3;
 }
+
+

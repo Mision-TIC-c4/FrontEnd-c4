@@ -7,3 +7,12 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 50px
 }
+.subs {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    color: cornsilk;
+}
+
+.bgBotones {
+    background-color: #4d194d;
+}

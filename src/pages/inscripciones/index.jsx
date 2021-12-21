@@ -2,8 +2,8 @@ import React from 'react'
 
 const IndexInscripciones = () => {
     return (
-        <div>
-            
+        <div className='m-2'>
+            Página para inscripciones
         </div>
     )
 }

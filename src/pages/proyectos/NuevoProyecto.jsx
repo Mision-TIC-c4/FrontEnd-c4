@@ -2,7 +2,7 @@ import React from 'react'
 
 const NuevoProyecto = () => {
     return (
-        <div>
+        <div className='m-2'>
             <h1>
                 Crear nuevo proyecto
             </h1>

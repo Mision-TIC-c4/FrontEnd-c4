@@ -17,7 +17,7 @@ const AccordeonDetailsStyled = styled((props) => <AccordionDetails {...props} />
 
 const IndexProyectos = () => {
   return (
-    <div>
+    <div className='m-2'>
       <AccordionStyled>
         <AccordionSummaryStyled
 

@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from 'components/Sidebar'
-import {useNavigate, Outlet } from 'react-router-dom'
+import { useNavigate, Outlet } from 'react-router-dom'
 
 
 const PrivateLayout = () => {
@@ -35,12 +35,12 @@ const PrivateLayout = () => {
             <Sidebar />
             <div className='flex w-full h-full'>
                 <div className='w-full h-full  overflow-y-scroll'>
-                
-                <Outlet />
+
+                    <Outlet />
 
                 </div>
             </div>
-            
+
         </div>
     )
 }

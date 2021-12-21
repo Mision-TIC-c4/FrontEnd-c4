@@ -15,30 +15,39 @@ import AuthLayout from 'layouts/AuthLayout'
 import Registro from 'pages/autenticacion/registro'
 import PrivateLayout from 'layouts/PrivateLayout'
 import InicioPag from 'pages/autenticacion/login'
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql',
+  cache: new InMemoryCache()
+})
 
 
 function App() {
   return (
-    <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<PrivateLayout />}>
-        <Route path='' element={<InicioPag />}/>
-        <Route path='/login' element={<Login />}/>
-        <Route path='/usuarios' element={<IndexUsuarios />}/>
-        <Route path='/usuarios/editar/:_id' element={<EditarUsuario />}/>
-        <Route path='/proyectos' element={<IndexProyectos />}/>
-        <Route path='/proyectos/nuevoproyecto' element={<NuevoProyecto/>}/>
-        <Route path='/avances/:projectid' element={<IndexAvances/>}/>
-        <Route path='/perfil' element={<Perfil/>}/>
-        <Route path='/inscripciones' element={<IndexInscripciones/>}/>
-        {/* <Route path='/' element={</>}/> */}
-      </Route>
-      <Route path='/auth' element={<AuthLayout/>}>
-        <Route path='registro' element={<Registro/>}/>
-      
-      </Route>
-    </Routes>
-    </BrowserRouter>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<PrivateLayout />}>
+            <Route path='' element={<InicioPag />} />
+
+            <Route path='/usuarios' element={<IndexUsuarios />} />
+            <Route path='/usuarios/editar/:_id' element={<EditarUsuario />} />
+            <Route path='/proyectos' element={<IndexProyectos />} />
+            <Route path='/proyectos/nuevoproyecto' element={<NuevoProyecto />} />
+            <Route path='/avances/:projectid' element={<IndexAvances />} />
+            <Route path='/perfil' element={<Perfil />} />
+            <Route path='/inscripciones' element={<IndexInscripciones />} />
+            {/* <Route path='/' element={</>}/> */}
+          </Route>
+          <Route path='/auth' element={<AuthLayout />}>
+            <Route path='registro' element={<Registro />} />
+            <Route path='login' element={<Login />} />
+
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ApolloProvider>
   );
 }
 
