@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 import { GET_USUARIOS } from 'graphql/usuarios/queries'
 import { Link } from 'react-router-dom';
 import EditarUsuario from 'pages/usuarios/editar'
+import { Enum_Rol, Enum_EstadoUsuario } from 'utils/enums';
 
 const IndexUsuarios = () => {
     const { data, error, loading } = useQuery(GET_USUARIOS);
@@ -23,7 +24,7 @@ const IndexUsuarios = () => {
     return (
         <div className=''>
             <h2 className='title m-2'>
-                Datos de Usuarios
+                Lista de Usuarios
             </h2>
             <div>
                 <table className='tabla'>
@@ -48,14 +49,13 @@ const IndexUsuarios = () => {
                                                 <td>{u.apellido}</td>
                                                 <td>{u.correo}</td>
                                                 <td>{u.identificacion}</td>
-                                                <td>{u.rol}</td>
-                                                {/* <td>{/*Enum_Rol[u.rol] </td> */}
-                                                <td>{u.estado}</td>
+                                                <td>{Enum_Rol[u.rol]}</td>
+                                                <td>{Enum_EstadoUsuario[u.estado]}</td>
                                                 <td>
                                                     <Link to={`/usuarios/editar/${u._id}`}>
                                                         <i className='fa fa-pencil'></i>
                                                     </Link>
-                                                    
+
                                                 </td>
 
                                             </tr>

@@ -52,7 +52,7 @@ const EditarUsuario = () => {
 
     return (
         <div className='m-2'>
-            <div className='flex flex-col w-full h-full items-center justify-center p-10'>
+            <div className='flex flex-col w-full h-full items-center justify-center pt-3'>
                 <div className=' flex justify-between'>
                     <button>
                         <Link className='p-5' to={`/usuarios`}>

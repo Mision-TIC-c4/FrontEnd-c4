@@ -13,6 +13,11 @@
     color: cornsilk;
 }
 
+.cards {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+}
+
 .bgBotones {
     background-color: #4d194d;
 }
