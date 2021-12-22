@@ -18,8 +18,8 @@ import InicioPag from 'pages/autenticacion/login'
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
-  //uri: 'https://project4ciclo4.herokuapp.com/graphql',
+  //uri: 'http://localhost:4000/graphql',
+  uri: 'https://project4ciclo4.herokuapp.com/graphql',
   cache: new InMemoryCache()
 })
 
