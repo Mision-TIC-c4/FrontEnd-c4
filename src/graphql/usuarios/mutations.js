@@ -1,29 +1,51 @@
 import { gql } from "@apollo/client";
 
-const EDITAR_USUARIO = gql `
-mutation EditarUsuario(
-    $nombre: String, 
-    $apellido: String, 
-    $identificacion: String, 
-    $correo: String, 
-    $estado: Enum_EstadoUsuario, 
-    $id: String) {
+const EDITAR_USUARIO = gql`
+  mutation editarUsuario(
+    $id: String
+    $nombre: String
+    $apellido: String
+    $identificacion: String
+    $correo: String
+    $rol: Enum_Rol
+  ) {
     editarUsuario(
-        nombre: $nombre, 
-        apellido: $apellido, 
-        identificacion: $identificacion, 
-        correo: $correo, 
-        estado: $estado, 
-        _id: $id) {
+      _id: $id
+      nombre: $nombre
+      apellido: $apellido
+      identificacion: $identificacion
+      correo: $correo
+      rol: $rol
+    ) {
       nombre
       apellido
       correo
       identificacion
-      password
       rol
-      _id
     }
   }
 `;
 
-export { EDITAR_USUARIO };
+const REGISTRAR = gql`
+  mutation registro(
+    $nombre: String!
+    $apellido: String!
+    $identificacion: String!
+    $correo: String!
+    $rol: Enum_Rol!
+    $password: String!
+  ) {
+    registro(
+      nombre: $nombre
+      apellido: $apellido
+      identificacion: $identificacion
+      correo: $correo
+      rol: $rol
+      password: $password
+    ) {
+      token
+    }
+  }
+`;
+
+export { EDITAR_USUARIO, REGISTRAR };

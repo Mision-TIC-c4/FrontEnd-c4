@@ -15,4 +15,10 @@
   @apply rounded-md flex w-full justify-between cursor-pointer items-center m-3 p-3;
 }
 
+.label {
+  @apply p-1 m-2 text-center;
+}
 
+.formulario {
+  @apply rounded-xl flex flex-col bg-gray-100 items-center justify-center p-3;
+}

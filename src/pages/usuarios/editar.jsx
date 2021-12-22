@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client'
-import { GET_USUARIOS } from 'graphql/usuarios/queries'
+import { GET_USUARIOS, GET_USUARIO } from 'graphql/usuarios/queries'
 import { Link, useParams } from 'react-router-dom'
 import useFormData from 'hooks/useFormData'
 import { EDITAR_USUARIO } from 'graphql/usuarios/mutations'
+import ButtonLoading from 'components/ButtonLoading'
+import DropDown from 'components/Dropdown'
+import { Enum_EstadoUsuario } from 'utils/enums'
+import { toast } from 'react-toastify'
 
 const EditarUsuario = () => {
     const { form, formData, updateFormData } = useFormData(null);
@@ -13,7 +17,7 @@ const EditarUsuario = () => {
         data: queryData,
         error: queryError,
         loading: queryLoading,
-    } = useQuery(GET_USUARIOS, { variables: { _id }, })
+    } = useQuery(GET_USUARIO, { variables: { _id }, })
     //carga mutations
     const [editarUsuario, { data: mutationData, loading: mutationLoading, error: mutationError }] = useMutation(EDITAR_USUARIO)
 
@@ -23,47 +27,71 @@ const EditarUsuario = () => {
         console.log(formData);
         await
             editarUsuario({
-                variables: { _id, ...formData }
-            })
+                variables: { _id, ...formData },
+            });
     }
 
     useEffect(() => {
         if (mutationData) {
+            toast.success('Usuario Modificado')
             console.log('Usuario modificado')
         }
     }, [mutationData])
 
     useEffect(() => {
-        console.log('data mutation', mutationData)
-    })
-    
+        if (mutationError) {
+            toast.error('Error modificando usuario')
+        }
+        if (queryError) {
+            toast.error('Error consultando el usuario seleccionado')
+        }
+        //console.log('data mutation', mutationData)
+    },[queryError, mutationError])
+
     if (queryLoading) return <div>...loading</div>
 
     return (
         <div className='m-2'>
-            <h2 className='title'>Editar usuario</h2>
-            <div>
-                <form action="" 
-                onSubmit={submitForm}
-                onChange={updateFormData}
-                ref={form}
-                className='flex flex-col items-center justify-center'>
-                    <div>
-                        <label htmlFor="">Nombre del usuario
-                            <input type="text" placeholder='nombre' name='nombre' defaultValue={queryData.Usuarios.nombre}/>
+            <div className='flex flex-col w-full h-full items-center justify-center p-10'>
+                <div className=' flex justify-between'>
+                    <button>
+                        <Link className='p-5' to={`/usuarios`}>
+                            <i className='fa fa-arrow-left text-red-600 '></i>
+                        </Link>
+                    </button>
+                    <h2 className='title'>Editar usuario</h2>
+                </div>
+                <form action=""
+                    onSubmit={submitForm}
+                    onChange={updateFormData}
+                    ref={form}
+                    className='flex flex-col items-center justify-center'>
+                    <div className='formulario'>
+                        <label className='label' htmlFor="">Nombre del usuario
+                            <input className='input' type="text" placeholder='Nombre' name='nombre' defaultValue={queryData.Usuario.nombre} />
                         </label>
-                        <label htmlFor="">Apellido del usuario
-                            <input type="text" placeholder='' name='apellido' defaultValue={queryData.Usuarios.apellido}/>
+                        <label className='label' htmlFor="">Apellido del usuario
+                            <input className='input' type="text" placeholder='Apellido' name='apellido' defaultValue={queryData.Usuario.apellido} />
                         </label>
-                        <label htmlFor="">Correo del usuario
-                            <input type="text" placeholder='correo' name='correo' defaultValue={queryData.Usuarios.correo}/>
+                        <label className='label' htmlFor="">Correo del usuario
+                            <input className='input' type="text" placeholder='Correo' name='correo' defaultValue={queryData.Usuario.correo} />
                         </label>
-                        <label htmlFor="">Identificación del usuario
-                            <input type="text" placeholder='identificacion' name='identificacion' defaultValue={queryData.Usuarios.identificacion}/>
+                        <label className='label' htmlFor="">Identificación del usuario
+                            <input className='input' type="text" placeholder='Identificacion' name='identificacion' defaultValue={queryData.Usuario.identificacion} />
                         </label>
-                        {/* <label htmlFor="">Estado del usuario
-                            <input type="text" placeholder='estado' name='estado' defaultValue={queryData.Usuarios.estado}/>
-                        </label> */}
+                        <DropDown
+                            label='Estado de la persona:'
+                            name='estado'
+                            defaultValue={queryData.Usuario.estado}
+                            required
+                            options={Enum_EstadoUsuario}
+                        />
+                        <span>Rol de Usuario: {queryData.Usuario.rol}</span>
+                        <ButtonLoading
+                            text='Editar usuario'
+                            disabled={Object.keys(formData).length === 0}
+                            loading={mutationLoading}
+                        />
                     </div>
 
                 </form>

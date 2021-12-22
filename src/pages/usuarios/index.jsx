@@ -7,7 +7,11 @@ import { Link } from 'react-router-dom';
 import EditarUsuario from 'pages/usuarios/editar'
 
 const IndexUsuarios = () => {
-    const { data, error, loading } = useQuery(GET_USUARIOS)
+    const { data, error, loading } = useQuery(GET_USUARIOS);
+
+    useEffect(() => {
+        console.log('Datos server', data)
+    }, [data]);
 
     useEffect(() => {
         if (error) {
@@ -16,8 +20,6 @@ const IndexUsuarios = () => {
     }, [error])
 
     if (loading) return <div>Cargando...</div>
-
-
     return (
         <div className=''>
             <h2 className='title m-2'>
@@ -38,23 +40,31 @@ const IndexUsuarios = () => {
                         {
                             data && data.Usuarios ? (
                                 <>
-                                    {data.Usuarios.map((u) => (
-                                        <tr key={u._id}>
-                                            <td>{u.nombre}</td>
-                                            <td>{u.apellido}</td>
-                                            <td>{u.correo}</td>
-                                            <td>{u.identificacion}</td>
-                                            <td>{u.rol}</td>
-                                            <td>{/*Enum_Rol[u.rol] */}</td>
-                                            <td>
-                                                <Link to={`/usuarios/editar/${u._id}`}>
-                                                    <i className='fa fa-pencil'></i>
-                                                </Link>
-                                            </td>
+                                    {data && data.Usuarios.map((u) => {
 
-                                        </tr>
+                                        return (
+                                            <tr key={u._id}>
+                                                <td>{u.nombre}</td>
+                                                <td>{u.apellido}</td>
+                                                <td>{u.correo}</td>
+                                                <td>{u.identificacion}</td>
+                                                <td>{u.rol}</td>
+                                                {/* <td>{/*Enum_Rol[u.rol] </td> */}
+                                                <td>{u.estado}</td>
+                                                <td>
+                                                    <Link to={`/usuarios/editar/${u._id}`}>
+                                                        <i className='fa fa-pencil'></i>
+                                                    </Link>
+                                                    
+                                                </td>
 
-                                    ))}
+                                            </tr>
+
+                                        )
+                                    }
+
+                                    )
+                                    }
 
                                 </>
                             ) : (
@@ -66,7 +76,6 @@ const IndexUsuarios = () => {
                     </tbody>
                 </table>
             </div>
-            <EditarUsuario />
         </div >
     )
 }

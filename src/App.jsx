@@ -2,13 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import IndexUsuarios from './pages/usuarios';
-import IndexProyectos from './pages/proyectos';
+import IndexProyectos from './pages/proyectos/index';
 import NuevoProyecto from 'pages/proyectos/NuevoProyecto';
-import IndexAvances from 'pages/avances'
+import IndexAvances from 'pages/avances/index'
 import Perfil from './pages/perfil'
 import Login from './pages/Index';
-import IndexInscripciones from 'pages/inscripciones'
-import EditarUsuario from 'pages/usuarios'
+import IndexInscripciones from './pages/inscripciones/index'
+import EditarUsuario from './pages/usuarios/editar'
 import './styles/styles.css';
 import './styles/fonts.css';
 import AuthLayout from 'layouts/AuthLayout'
@@ -19,6 +19,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
+  //uri: 'https://project4ciclo4.herokuapp.com/graphql',
   cache: new InMemoryCache()
 })
 
